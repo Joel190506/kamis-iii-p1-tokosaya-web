@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250" role="img" aria-label="Speaker bluetooth portabel BT-5 dengan dua driver indigo">
+  <!-- Aset penanda produk BT-5 — siluet speaker, palet token Bab 4 -->
+  <rect width="400" height="250" fill="#F8FAFC"/>
+  <rect x="102" y="56" width="196" height="138" rx="22" fill="#1E293B"/>
+  <rect x="120" y="74" width="160" height="102" rx="14" fill="#334155"/>
+  <circle cx="170" cy="125" r="30" fill="#4F46E5"/>
+  <circle cx="170" cy="125" r="14" fill="#1E293B"/>
+  <circle cx="230" cy="125" r="30" fill="#4F46E5"/>
+  <circle cx="230" cy="125" r="14" fill="#1E293B"/>
+  <circle cx="200" cy="68" r="6" fill="#F59E0B"/>
+  <rect x="168" y="196" width="64" height="10" rx="5" fill="#334155"/>
+</svg>

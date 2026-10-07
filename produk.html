@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- Detail produk Tokosaya — halaman yang dijanjikan Bab 4 ("dibangun di
+     bab-bab selanjutnya") dan disebut Bab 7 sebagai output UTS, tetapi tidak
+     pernah dispesifikasikan isinya di Bab 1-7. Hanya produk Best Seller
+     KX-210 yang punya halaman detail, jadi hanya kartu KX-210 yang bertaut
+     ke sini. -->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Keyboard Mekanis KX-210 — keyboard mekanis 87 tombol dengan switch biru, koneksi USB-C, dan garansi 1 tahun. Rp650.000 di Tokosaya.">
+  <title>Keyboard Mekanis KX-210 — Tokosaya</title>
+  <link rel="icon" href="img/logo-tokosaya.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Navigasi utama">
+      <a class="site-nav-brand" href="index.html">Tokosaya</a>
+      <!-- Buka-tutup menu tanpa JavaScript: kotak centang tersembunyi yang
+           dipasangkan ke label .site-nav-burger lewat pasangan for-id -->
+      <input class="site-nav-toggle" type="checkbox" id="nav-toggle" aria-label="Menu navigasi">
+      <label class="site-nav-burger" for="nav-toggle"></label>
+      <ul class="site-nav-menu">
+          <li><a href="index.html" class="site-nav-link">Beranda</a></li>
+          <li><a href="katalog.html" class="site-nav-link">Katalog</a></li>
+          <li><a href="tentang.html" class="site-nav-link">Tentang</a></li>
+          <li><a href="kontak.html" class="site-nav-link">Kontak</a></li>
+      </ul>
+      <!-- Halaman keranjang dibangun di Bab 11 (varian Bootstrap); prototipe
+           Bab 1-8 menunjuk beranda supaya tidak ada tautan tanpa tujuan -->
+      <a class="site-nav-keranjang" href="index.html">Keranjang (0)</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Remah roti: jalan pulang yang jelas ke beranda dan katalog -->
+    <nav class="breadcrumb" aria-label="Remah roti">
+      <ol>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="katalog.html">Katalog</a></li>
+        <li aria-current="page">Keyboard Mekanis KX-210</li>
+      </ol>
+    </nav>
+
+    <div class="seksi">
+
+      <div class="blok">
+        <div class="produk-detail">
+
+          <div class="produk-detail-media">
+            <img src="img/produk-keyboard-kx210.svg" alt="Keyboard mekanis KX-210 berwarna arang dengan tombol indigo" width="400" height="250">
+            <span class="produk-flag produk-flag-best">Best Seller</span>
+          </div>
+
+          <div class="produk-detail-info">
+            <h1 class="produk-detail-nama">Keyboard Mekanis KX-210</h1>
+            <p class="produk-detail-kategori">Aksesori Input</p>
+            <p class="produk-detail-harga">Rp650.000</p>
+            <p class="produk-detail-deskripsi">Keyboard mekanis 87 tombol dengan switch biru untuk kerja lama yang nyaman. Tata letak tanpa blok numerik menyisakan ruang lebih lebar buat mouse tanpa mengorbankan tombol fungsi.</p>
+            <!-- Form prototipe statis: alamat penerima masih domain contoh,
+                 sama pola dengan form kontak Bab 2. Tanpa JavaScript, form ini
+                 tidak bisa memproses pesanan sendiri. -->
+            <form class="produk-beli" action="https://example.com/toko/keranjang" method="post">
+              <div class="kolom-form">
+                <label class="label-form" for="jumlah">Jumlah</label>
+                <input class="input-form input-jumlah" type="number" id="jumlah" name="jumlah" value="1" min="1" max="10" inputmode="numeric">
+              </div>
+              <button type="submit" class="tombol tombol-primer">Tambah ke Keranjang</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="blok">
+        <h2>Spesifikasi</h2>
+        <table class="spesifikasi">
+          <caption>Data spesifikasi Keyboard Mekanis KX-210</caption>
+          <tbody>
+            <tr>
+              <th scope="row">Kode Produk</th>
+              <td>KX-210</td>
+            </tr>
+            <tr>
+              <th scope="row">Kategori</th>
+              <td>Aksesori Input</td>
+            </tr>
+            <tr>
+              <th scope="row">Status</th>
+              <td>Best Seller</td>
+            </tr>
+            <tr>
+              <th scope="row">Tipe Switch</th>
+              <td>Mekanis biru (taktil, berbunyi saat ditekan)</td>
+            </tr>
+            <tr>
+              <th scope="row">Jumlah Tombol</th>
+              <td>87 tombol tanpa blok numerik</td>
+            </tr>
+            <tr>
+              <th scope="row">Koneksi</th>
+              <td>USB-C berkabel</td>
+            </tr>
+            <tr>
+              <th scope="row">Panjang Kabel</th>
+              <td>1,8 meter</td>
+            </tr>
+            <tr>
+              <th scope="row">Dimensi</th>
+              <td>360 &times; 135 &times; 38 mm</td>
+            </tr>
+            <tr>
+              <th scope="row">Berat</th>
+              <td>890 gram</td>
+            </tr>
+            <tr>
+              <th scope="row">Garansi</th>
+              <td>1 tahun</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="blok">
+        <h2>Produk Terkait</h2>
+        <div class="produk-row">
+
+          <article class="produk-card">
+            <img class="produk-gambar" src="img/produk-mouse-mw88.svg" alt="Mouse wireless MW-88 indigo dengan roda gulir amber" width="400" height="250">
+            <span class="produk-flag produk-flag-tersedia">Tersedia</span>
+            <h3 class="produk-card-nama">Mouse Wireless MW-88</h3>
+            <p class="produk-card-kategori">Aksesori Input</p>
+            <p class="produk-card-harga">Rp185.000</p>
+            <p class="produk-card-deskripsi">Mouse wireless 2,4 GHz dengan sensor presisi 1600 DPI.</p>
+          </article>
+
+          <article class="produk-card">
+            <img class="produk-gambar" src="img/produk-monitor-mr241.svg" alt="Monitor IPS 24 inci MR-241 dengan layar indigo" width="400" height="250">
+            <span class="produk-flag produk-flag-best">Best Seller</span>
+            <h3 class="produk-card-nama">Monitor IPS 24&#8243; MR-241</h3>
+            <p class="produk-card-kategori">Layar</p>
+            <p class="produk-card-harga">Rp1.899.000</p>
+            <p class="produk-card-deskripsi">Monitor IPS 24 inci full HD yang jernih untuk kerja tabel &amp; laporan.</p>
+          </article>
+
+          <article class="produk-card">
+            <img class="produk-gambar" src="img/produk-headphone-hs15.svg" alt="Headphone over-ear HS-15 dengan bantalan telinga indigo" width="400" height="250">
+            <span class="produk-flag produk-flag-tersedia">Tersedia</span>
+            <h3 class="produk-card-nama">Headphone Studio HS-15</h3>
+            <p class="produk-card-kategori">Audio</p>
+            <p class="produk-card-harga">Rp425.000</p>
+            <p class="produk-card-deskripsi">Headphone over-ear dengan bantalan lembut untuk rapat audio jangka panjang.</p>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-brand">Tokosaya</p>
+    <p class="footer-teks">Belanja Tepat, Kirim Cepat — Jl. Digital Raya No. 10, Jakarta &middot; halo@tokosaya.id &middot; (021) 555-0199</p>
+  </footer>
+
+</body>
+</html>

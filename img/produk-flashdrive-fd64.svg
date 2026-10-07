@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250" role="img" aria-label="Flash drive 64GB FD-64 dengan konektor USB berwarna perak">
+  <!-- Aset penanda produk FD-64 — siluet flash drive, palet token Bab 4 -->
+  <rect width="400" height="250" fill="#F8FAFC"/>
+  <rect x="100" y="96" width="176" height="58" rx="12" fill="#4F46E5"/>
+  <rect x="112" y="108" width="152" height="34" rx="6" fill="#4338CA"/>
+  <rect x="124" y="120" width="60" height="10" rx="5" fill="#F59E0B"/>
+  <rect x="276" y="104" width="52" height="42" rx="4" fill="#CBD5E1"/>
+  <rect x="292" y="114" width="12" height="22" fill="#94A3B8"/>
+  <rect x="310" y="114" width="12" height="22" fill="#94A3B8"/>
+  <circle cx="114" cy="125" r="8" fill="#E2E8F0"/>
+</svg>

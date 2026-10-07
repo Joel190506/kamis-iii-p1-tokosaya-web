@@ -1,0 +1,814 @@
+/* ============================================================================
+   Tokosaya — css/style.css
+   Proyek Bab 1-8: HTML + CSS murni. Tanpa JavaScript, tanpa framework.
+
+   Urutan berkas mengikuti kebiasaan proyek (Bab 3-5):
+     token (:root) -> gaya dasar (base) -> komponen -> halaman spesifik
+   lalu satu lapisan responsif mobile-first di bagian akhir.
+
+   Setiap blok diberi penanda bab asalnya supaya setiap keputusan di berkas ini
+   bisa ditelusuri balik ke bahan ajar. Blok yang tidak berasal dari bab mana
+   pun ditandai "tanpa rujukan bab" — tidak ada CSS yang lahir tanpa jejak.
+
+   admin.html memuat style.css ini LEBIH DULU, baru css/admin.css yang menimpa
+   denah grid. Urutan link itu memang diuji di Bab 7.
+   ============================================================================ */
+
+
+/* ============================================================================
+   BAB 4 — DESIGN TOKEN TOKOSAYA
+   Blok baku dari Bab 4 (4.5). Dipakai persis supaya seluruh halaman merujuk
+   satu pusat: ubah satu baris di sini, seluruh antarmuka ikut berubah.
+   ============================================================================ */
+:root {
+  --clr-primary: #4F46E5;      /* indigo — tombol & link utama */
+  --clr-primary-dark: #4338CA;
+  --clr-accent: #F59E0B;       /* amber — badge & sorotan */
+  --clr-dark: #1E293B;         /* heading & teks tegas */
+  --clr-body: #334155;         /* teks paragraf */
+  --clr-bg: #F8FAFC;           /* latar halaman */
+  --clr-surface: #FFFFFF;      /* kartu & panel */
+  --clr-border: #E2E8F0;
+  --clr-success: #16A34A;
+  --clr-danger: #DC2626;
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius: 12px;
+  --shadow-card: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --space-unit: 8px;           /* basis skala jarak 8/16/24/32/48/64 */
+}
+
+
+/* ============================================================================
+   BAB 3-5 — RESET RINGAN DAN GAYA DASAR
+   `box-sizing: border-box` global (Bab 5) + dasar tipografi (Bab 3-4).
+   ============================================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--clr-body);
+  background-color: var(--clr-bg);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--clr-dark);
+  line-height: 1.25;           /* Bab 4: 1.1-1.25 buat judul */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Tambahan dasar (tanpa rujukan bab): `address` bawaannya miring, padahal
+   data kontak Tokosaya sebaiknya tegak seperti teks biasa. */
+address {
+  font-style: normal;
+}
+
+/* Bab 6 — indikator fokus yang terlihat, satu aturan buat seluruh situs */
+a:focus-visible {
+  outline: 3px solid var(--clr-primary);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================================
+   BAB 6 — SITE-HEADER DAN SITE-NAV
+   Satu flex container: merek di kiri, sisanya terdorong ke kanan.
+
+   Di layar < 768 px nav bermuara pada hamburger CSS-only: sebuah kotak
+   centang tersembunyi (.site-nav-toggle) dipasangkan dengan label
+   (.site-nav-burger) lewat pasangan for-id, lalu panel menu dikendalikan
+   pemilih saudara `:checked ~`. Tanpa JavaScript sama sekali.
+
+   Panel menu diposisikan `absolute` di bawah header, jadi ia KELUAR dari
+   alur flex. Itu bukan detail kosmetik: kalau panel dibiarkan ikut alur
+   dengan `flex-basis: 100%`, ia mendorong tombol keranjang — yang ada
+   sesudahnya di DOM — ke baris ketiga, dan header melonjak dari 73 px ke
+   325 px setiap kali menu dibuka. Sebagai panel melayang, tinggi header
+   tetap 73 px baik tertutup maupun terbuka: nol pergeseran tata letak.
+
+   Kenapa 768 px, bukan 576 px? Satu baris nav butuh ~644 px (merek 101 +
+   menu 310 + keranjang 137 + dua celah 48 + padding 48). Di bawah itu nav
+   akan melipat dan menyisakan tombol keranjang menggantung sendirian.
+
+   Urutan DOM sengaja merek -> toggle -> burger -> menu -> keranjang supaya
+   urutan fokus keyboard sama dengan urutan visual, dan supaya di layar lebar
+   nav tampil persis seperti rancangan Bab 6: menu dulu, keranjang menyusul
+   di ujung kanan. Tidak ada properti `order` di mana pun.
+   ============================================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--space-unit));
+  padding: calc(var(--space-unit) * 2);
+}
+
+.site-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  margin-right: auto;          /* merek selalu di kiri, sisa isi ke kanan */
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  text-decoration: none;
+}
+
+/* --- Kotak centang tersembunyi: mesin buka-tutup menu ---
+   Disembunyikan secara visual tetapi TETAP bisa difokus keyboard, jadi
+   pengguna keyboard bisa membuka menu dengan tombol spasi. Sebagai kotak
+   centang, statusnya juga diumumkan sendiri oleh pembaca layar — itulah
+   sebabnya tidak ada `aria-expanded` di sini: CSS murni tidak bisa
+   menyinkronkan nilainya, sementara status kotak centang selalu benar. */
+.site-nav-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.site-nav-burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  color: var(--clr-dark);
+  cursor: pointer;
+}
+
+/* Ikon tiga garis: elemennya sendiri jadi garis tengah, dua garis lain
+   digambar lewat box-shadow supaya tidak perlu berkas ikon atau font ikon. */
+.site-nav-burger::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: currentColor;
+  box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
+}
+
+.site-nav-burger:hover,
+.site-nav-toggle:checked ~ .site-nav-burger {
+  border-color: var(--clr-primary);
+  color: var(--clr-primary);
+}
+
+/* Cincin fokus digambar di label, sebab kotak centangnya tak kasat mata */
+.site-nav-toggle:focus-visible ~ .site-nav-burger {
+  outline: 3px solid var(--clr-primary);
+  outline-offset: 2px;
+}
+
+/* --- Panel menu: tertutup di mobile, terbuka saat kotak centang dicentang ---
+   `display: none` saat tertutup bukan cuma soal tampilan: ia sekaligus
+   mengeluarkan keempat tautan menu dari urutan fokus keyboard, jadi pengguna
+   keyboard tidak tersesat ke tautan yang tak terlihat. */
+.site-nav-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: var(--clr-surface);
+  border-top: 1px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
+  box-shadow: var(--shadow-card);
+}
+
+.site-nav-toggle:checked ~ .site-nav-menu {
+  display: flex;
+}
+
+.site-nav-menu li + li {
+  border-top: 1px solid var(--clr-border);
+}
+
+.site-nav-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;            /* baris menu penuh, nyaman disentuh di HP */
+  color: var(--clr-body);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-nav-link:hover {
+  color: var(--clr-primary);
+}
+
+.site-nav-link-aktif {
+  color: var(--clr-primary);
+  font-weight: 600;
+}
+
+/* Dirapatkan di mobile supaya satu baris tetap muat sampai 320 px */
+.site-nav-keranjang {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: calc(var(--space-unit));
+  font-size: 0.9rem;
+  background-color: var(--clr-primary);
+  color: #FFFFFF;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-nav-keranjang:hover {
+  background-color: var(--clr-primary-dark);
+}
+
+
+/* ============================================================================
+   BAB 6 — HERO
+   Flex column, konten di tengah, latar gradien permukaan -> latar halaman.
+   ============================================================================ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--space-unit) * 2);
+  padding: calc(var(--space-unit) * 5) calc(var(--space-unit) * 2);
+  text-align: center;
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--clr-bg) 100%);
+}
+
+.hero-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--clr-dark);
+}
+
+.hero-subtitle {
+  max-width: 640px;
+}
+
+.hero-cta {
+  background-color: var(--clr-primary);
+  color: #FFFFFF;
+  /* Nilai literal Bab 6. Catatan audit Bab 5: 12 px bukan kelipatan 8 px;
+     dipertahankan apa adanya supaya sebanding dengan kode buku. */
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.hero-cta:hover {
+  background-color: var(--clr-primary-dark);
+}
+
+/* Tambahan proyek (tanpa rujukan bab): ilustrasi hero dari img/. `.hero`
+   sudah flex column + align-items center, jadi gambar cukup dibatasi lebarnya.
+   Aset hero-tokosaya.svg dari Bab 2 digambar ulang tanpa teks — versi buku
+   memuat tulisan yang persis mengulang h1 dan hero-subtitle. */
+.hero-gambar {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+
+/* ============================================================================
+   BAB 6 — KARTU PRODUK
+   Struktur & gaya Bab 6 (index.html versi final), dengan dua penyesuaian dari
+   bab yang lebih akhir:
+     - nama kelas field mengikuti Bab 7: produk-card-nama / -kategori / -harga
+       / -deskripsi;
+     - gambar memakai width:100%; height:auto dari Bab 7, bukan
+       `height: 140px; object-fit: cover` Bab 6 yang memotong gambar produk.
+   ============================================================================ */
+.produk-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--space-unit) * 2);
+}
+
+.produk-card {
+  flex: 1 1 100%;              /* mobile: satu kartu penuh lebar */
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit));
+  padding: calc(var(--space-unit) * 2);
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.produk-gambar {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  background-color: var(--clr-bg);
+}
+
+.produk-flag {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #FFFFFF;
+}
+
+/* Bab 5 memasangkan amber dengan teks gelap (--clr-dark), Bab 6 dengan teks
+   putih. Pasangan Bab 5 yang dipakai: putih di atas amber cuma 2,2:1 kontrasnya,
+   jauh di bawah ambang WCAG AA. */
+.produk-flag-best {
+  background-color: var(--clr-accent);
+  color: var(--clr-dark);
+}
+
+.produk-flag-tersedia { background-color: var(--clr-success); }
+.produk-flag-stok     { background-color: var(--clr-danger); }
+.produk-flag-baru     { background-color: var(--clr-primary); }
+
+.produk-card-nama {
+  font-size: 1rem;
+}
+
+.produk-card-kategori {
+  font-size: 0.85rem;
+  color: var(--clr-primary);
+}
+
+.produk-card-harga {
+  font-weight: 700;
+  color: var(--clr-dark);
+  margin-top: auto;            /* Bab 6: harga menempel ke dasar kartu */
+}
+
+.produk-card-deskripsi {
+  font-size: 0.9rem;
+}
+
+/* Tambahan proyek (tanpa rujukan bab): hanya kartu KX-210 yang punya halaman
+   detail, jadi hanya kartu itu yang mendapat tautan "Lihat Detail". */
+.produk-card-tautan {
+  align-self: flex-start;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--clr-primary);
+  text-decoration: none;
+}
+
+.produk-card-tautan:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================================================================
+   BAB 6 — SEKSI PRODUK DI BERANDA
+   Bab 6 menulis `.produk-unggulan { padding: 48px 24px }`. Di sini ditambah
+   `max-width: 1200px` + `margin-inline: auto` mengikuti pola `.dasbor-main`
+   Bab 7, supaya baris kartu tidak melebar tanpa batas di layar besar.
+   ============================================================================ */
+.produk-unggulan {
+  padding: calc(var(--space-unit) * 4) calc(var(--space-unit) * 2);
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.produk-unggulan h2 {
+  text-align: center;
+  margin-bottom: calc(var(--space-unit) * 4);
+}
+
+
+/* ============================================================================
+   BAB 6 — FOOTER
+   Satu baris flex yang menekuk di layar sempit. Latar gelap (--clr-dark).
+   ============================================================================ */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(var(--space-unit) * 2);
+  padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 2);
+  background-color: var(--clr-dark);
+}
+
+.footer-brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #FFFFFF;
+}
+
+.footer-teks {
+  color: #E2E8F0;
+  font-size: 0.9rem;
+}
+
+
+/* ============================================================================
+   BAB 7 — KATALOG BERBASIS GRID
+   `.katalog-grid` disalin dari Bab 7 apa adanya: satu kolom di HP, lalu 2/3/4
+   kolom pada 576/992/1200 px — 8 produk baku jadi 4 kolom x 2 baris di 1200 px.
+   Bab 7 menyebut `.katalog`, `.katalog-judul`, dan `.katalog-intro` tetapi
+   tidak memberi gayanya; tiga aturan pertama di bawah melengkapinya dengan
+   skala jarak 8 px Bab 4.
+   ============================================================================ */
+.katalog {
+  padding: calc(var(--space-unit) * 4) calc(var(--space-unit) * 2);
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.katalog-judul {
+  text-align: center;
+  margin-bottom: calc(var(--space-unit));
+}
+
+.katalog-intro {
+  text-align: center;
+  margin-bottom: calc(var(--space-unit) * 4);
+}
+
+.katalog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: calc(var(--space-unit) * 3);
+}
+
+@media (min-width: 576px) {
+  .katalog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 992px) {
+  .katalog-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1200px) {
+  .katalog-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+
+/* ============================================================================
+   BAB 2 + TAMBAHAN PROYEK — KERANGKA HALAMAN DALAM
+   tentang.html, kontak.html, dan produk.html memakai satu wadah `.seksi` dan
+   blok konten `.blok`. Ritme antar-elemen memakai skala 8 px Bab 4.
+   ============================================================================ */
+.seksi {
+  padding: calc(var(--space-unit) * 4) calc(var(--space-unit) * 2);
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.seksi-tajuk {
+  margin-bottom: calc(var(--space-unit) * 4);
+}
+
+.blok + .blok {
+  margin-top: calc(var(--space-unit) * 6);
+}
+
+.blok > * + * {
+  margin-top: calc(var(--space-unit) * 2);
+}
+
+.blok > h3 {
+  margin-top: calc(var(--space-unit) * 3);
+}
+
+.blok > p,
+.blok > ul,
+.blok > ol,
+.blok > dl {
+  max-width: 72ch;             /* batas panjang baris biar nyaman dibaca */
+}
+
+
+/* ============================================================================
+   BAB 2 + TAMBAHAN PROYEK — FORM DAN TOMBOL
+   Form kontak mengikuti Bab 2 (tiga kolom, label for-id), disempurnakan dengan
+   `autocomplete` yang dituntut checklist QA Bab 15.1. Gaya kontrol form memakai
+   token warna dan radius Bab 4.
+   ============================================================================ */
+.form-kontak {
+  max-width: 520px;
+}
+
+.kolom-form {
+  margin-bottom: calc(var(--space-unit) * 3);
+}
+
+.label-form {
+  display: block;
+  margin-bottom: calc(var(--space-unit));
+  font-weight: 600;
+  color: var(--clr-dark);
+}
+
+.input-form {
+  width: 100%;
+  padding: calc(var(--space-unit) * 2);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--clr-body);
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+}
+
+.input-form:focus-visible {
+  outline: 3px solid var(--clr-primary);
+  outline-offset: 2px;
+  border-color: var(--clr-primary);
+}
+
+textarea.input-form {
+  resize: vertical;
+  min-height: calc(var(--space-unit) * 16);
+}
+
+.tombol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 12px 24px;          /* sejajar dengan .hero-cta Bab 6 */
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.tombol-primer {
+  background-color: var(--clr-primary);
+  color: #FFFFFF;
+}
+
+.tombol-primer:hover {
+  background-color: var(--clr-primary-dark);
+}
+
+.tombol:focus-visible {
+  outline: 3px solid var(--clr-primary);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================================
+   TANPA RUJUKAN BAB — HALAMAN DETAIL PRODUK
+   produk.html tidak pernah dispesifikasikan di Bab 1-7: Bab 4 hanya
+   menjanjikannya, Bab 7 menyebutnya sebagai output UTS, Bab 15.1 menyebutnya
+   "detail satu produk". Karena itu gaya di bawah disusun dari bahasa visual
+   yang sudah ada — kartu Bab 6, tabel semantik Bab 2, skala 8 px Bab 4 —
+   bukan dari sebuah bab tertentu.
+   ============================================================================ */
+.breadcrumb {
+  padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 2) 0;
+  max-width: 1200px;
+  margin-inline: auto;
+  font-size: 0.85rem;
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--space-unit));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb li + li::before {
+  content: "/";
+  margin-right: calc(var(--space-unit));
+  color: var(--clr-border);
+}
+
+.breadcrumb a {
+  color: var(--clr-body);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--clr-primary);
+  text-decoration: underline;
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--clr-primary);
+  font-weight: 600;
+}
+
+.produk-detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: calc(var(--space-unit) * 4);
+}
+
+.produk-detail-media {
+  position: relative;
+}
+
+.produk-detail-media img {
+  width: 100%;
+  height: auto;
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+}
+
+.produk-detail-media .produk-flag {
+  position: absolute;
+  top: calc(var(--space-unit) * 2);
+  right: calc(var(--space-unit) * 2);
+}
+
+.produk-detail-info > * + * {
+  margin-top: calc(var(--space-unit) * 2);
+}
+
+.produk-detail-nama {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.produk-detail-kategori {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--clr-primary);
+}
+
+.produk-detail-harga {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--clr-dark);
+}
+
+.produk-beli {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: calc(var(--space-unit) * 2);
+  padding-top: calc(var(--space-unit) * 2);
+}
+
+.produk-beli .kolom-form {
+  margin-bottom: 0;
+}
+
+.input-jumlah {
+  width: calc(var(--space-unit) * 12);
+}
+
+.spesifikasi {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.spesifikasi caption {
+  caption-side: bottom;
+  padding: calc(var(--space-unit) * 2) 0;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.spesifikasi th,
+.spesifikasi td {
+  padding: calc(var(--space-unit) * 2);
+  text-align: left;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.spesifikasi th[scope="row"] {
+  width: 40%;
+  font-family: var(--font-heading);
+  color: var(--clr-dark);
+}
+
+.spesifikasi tbody tr:last-child th,
+.spesifikasi tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* ============================================================================
+   BAB 7 — LAPISAN RESPONSIF (mobile-first, menaik)
+   Nilai dasar di atas sudah ramping buat HP; blok ini menaikkan jarak dan
+   kepadatan saat layar melebar. Urutan media query menaik persis pola Bab 7:
+   tulis gaya dasar dulu, lalu tambahkan hanya yang harus berubah.
+   ============================================================================ */
+
+/* sm 576 px — katalog dua kolom; jarak dan padding kembali ke nilai penuh Bab 6 */
+@media (min-width: 576px) {
+  .site-nav {
+    padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 3);
+  }
+
+  .hero {
+    padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 3);
+  }
+
+  .produk-row {
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .produk-card {
+    flex: 0 1 250px;           /* nilai Bab 6 dari 576 px ke atas */
+  }
+
+  .produk-unggulan,
+  .katalog,
+  .seksi {
+    padding: calc(var(--space-unit) * 6) calc(var(--space-unit) * 3);
+  }
+
+  .breadcrumb {
+    padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 3) 0;
+  }
+
+  .site-footer {
+    padding: calc(var(--space-unit) * 4) calc(var(--space-unit) * 3);
+  }
+}
+
+/* md 768 px — nav kembali mendatar, detail produk jadi dua kolom.
+   768 px (bukan 576 px) karena satu baris nav butuh ~644 px; di bawah itu
+   tombol keranjang akan terlempar sendirian ke baris kedua. */
+@media (min-width: 768px) {
+  .site-nav {
+    column-gap: calc(var(--space-unit) * 3);
+    row-gap: calc(var(--space-unit) * 2);
+  }
+
+  /* Tombol buka-tutup dan kotak centangnya hilang; menu selalu tampil mendatar */
+  .site-nav-toggle,
+  .site-nav-burger {
+    display: none;
+  }
+
+  .site-nav-menu {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    gap: calc(var(--space-unit) * 3);
+    background-color: transparent;
+    border-top: none;
+    border-bottom: none;
+    box-shadow: none;
+  }
+
+  .site-nav-menu li + li {
+    border-top: none;
+  }
+
+  .site-nav-link {
+    width: auto;
+    min-height: 40px;
+  }
+
+  .site-nav-keranjang {
+    padding: calc(var(--space-unit)) calc(var(--space-unit) * 2);
+    font-size: 1rem;
+  }
+
+  .produk-detail {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: calc(var(--space-unit) * 6);
+  }
+}

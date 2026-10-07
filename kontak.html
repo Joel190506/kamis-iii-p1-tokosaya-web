@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!-- Kontak Tokosaya — form mengikuti struktur Bab 2 (tiga kolom: nama, email,
+     pesan, dengan pasangan label for-id), disempurnakan dengan required dan
+     autocomplete yang dituntut checklist QA Bab 15.1. Bab 2 menaruh h1 di
+     dalam <header>; di sini h1 pindah ke <main> mengikuti Bab 6 yang memakai
+     .site-header khusus navigasi. -->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hubungi Tokosaya: Jl. Digital Raya No. 10, Jakarta, email halo@tokosaya.id, telepon (021) 555-0199.">
+  <title>Kontak Tokosaya</title>
+  <link rel="icon" href="img/logo-tokosaya.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Navigasi utama">
+      <a class="site-nav-brand" href="index.html">Tokosaya</a>
+      <!-- Buka-tutup menu tanpa JavaScript: kotak centang tersembunyi yang
+           dipasangkan ke label .site-nav-burger lewat pasangan for-id -->
+      <input class="site-nav-toggle" type="checkbox" id="nav-toggle" aria-label="Menu navigasi">
+      <label class="site-nav-burger" for="nav-toggle"></label>
+      <ul class="site-nav-menu">
+          <li><a href="index.html" class="site-nav-link">Beranda</a></li>
+          <li><a href="katalog.html" class="site-nav-link">Katalog</a></li>
+          <li><a href="tentang.html" class="site-nav-link">Tentang</a></li>
+          <li><a href="kontak.html" class="site-nav-link site-nav-link-aktif" aria-current="page">Kontak</a></li>
+      </ul>
+      <!-- Halaman keranjang dibangun di Bab 11 (varian Bootstrap); prototipe
+           Bab 1-8 menunjuk beranda supaya tidak ada tautan tanpa tujuan -->
+      <a class="site-nav-keranjang" href="index.html">Keranjang (0)</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="seksi">
+      <h1 class="seksi-tajuk">Hubungi Tokosaya</h1>
+
+      <section class="blok" id="form-pesan" aria-labelledby="judul-form">
+        <h2 id="judul-form">Form Pesan</h2>
+        <!-- Form prototipe statis: action masih domain contoh, persis pola
+             Bab 2. Tanpa JavaScript, form ini tidak mengirim apa pun sendiri. -->
+        <form class="form-kontak" action="https://example.com/toko/kirim" method="post">
+          <div class="kolom-form">
+            <label class="label-form" for="nama">Nama Lengkap</label>
+            <input class="input-form" type="text" id="nama" name="nama" autocomplete="name" required>
+          </div>
+
+          <div class="kolom-form">
+            <label class="label-form" for="email">Alamat Email</label>
+            <input class="input-form" type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+
+          <div class="kolom-form">
+            <label class="label-form" for="pesan">Pesan</label>
+            <textarea class="input-form" id="pesan" name="pesan" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="tombol tombol-primer">Kirim Pesan</button>
+        </form>
+      </section>
+
+      <section class="blok" id="alamat" aria-labelledby="judul-alamat">
+        <h2 id="judul-alamat">Alamat dan Layanan</h2>
+        <address>
+          Jl. Digital Raya No. 10, Jakarta<br>
+          <a href="mailto:halo@tokosaya.id">halo@tokosaya.id</a><br>
+          <a href="tel:+62215550199">(021)&nbsp;555&#8209;0199</a>
+        </address>
+        <dl>
+          <dt>Jam layanan</dt>
+          <dd>Senin sampai Jumat, 09.00 sampai 17.00 WIB.</dd>
+          <dt>Harga jujur</dt>
+          <dd>Harga tercantum adalah harga akhir; tidak ada biaya tambahan yang muncul di pembayaran.</dd>
+          <dt>Layanan cepat</dt>
+          <dd>Pesanan pada jam kerja diproses hari yang sama dan pengiriman segera disusun.</dd>
+          <dt>Dampingan memilih</dt>
+          <dd>Tim Tokosaya menolong pelanggan memilih produk sesuai kebutuhan pekerjaan, bukan yang paling mahal.</dd>
+        </dl>
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-brand">Tokosaya</p>
+    <p class="footer-teks">Belanja Tepat, Kirim Cepat — Jl. Digital Raya No. 10, Jakarta &middot; halo@tokosaya.id &middot; (021) 555-0199</p>
+  </footer>
+
+</body>
+</html>

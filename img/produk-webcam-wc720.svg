@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250" role="img" aria-label="Webcam HD WC-720 dengan lensa bundar dan klip penjepit">
+  <!-- Aset penanda produk WC-720 — siluet webcam, palet token Bab 4 -->
+  <rect width="400" height="250" fill="#F8FAFC"/>
+  <rect x="112" y="86" width="176" height="94" rx="30" fill="#1E293B"/>
+  <circle cx="200" cy="133" r="34" fill="#334155"/>
+  <circle cx="200" cy="133" r="20" fill="#4F46E5"/>
+  <circle cx="192" cy="125" r="7" fill="#F8FAFC"/>
+  <circle cx="266" cy="106" r="6" fill="#F59E0B"/>
+  <rect x="168" y="176" width="64" height="14" rx="7" fill="#334155"/>
+  <rect x="186" y="190" width="28" height="18" fill="#334155"/>
+  <rect x="150" y="208" width="100" height="12" rx="6" fill="#334155"/>
+</svg>

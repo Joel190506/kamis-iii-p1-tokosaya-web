@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250" role="img" aria-label="Keyboard mekanis KX-210 hitam dengan tombol indigo">
+  <!-- Aset penanda produk KX-210 — siluet keyboard, palet token Bab 4 -->
+  <rect width="400" height="250" fill="#F8FAFC"/>
+  <rect x="34" y="72" width="332" height="106" rx="16" fill="#1E293B"/>
+  <rect x="50" y="86" width="300" height="78" rx="10" fill="#334155"/>
+
+  <!-- Baris tombol 1 -->
+  <rect x="62" y="94" width="38" height="14" rx="4" fill="#F59E0B"/>
+  <rect x="108" y="94" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="154" y="94" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="200" y="94" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="246" y="94" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="292" y="94" width="46" height="14" rx="4" fill="#4F46E5"/>
+
+  <!-- Baris tombol 2 -->
+  <rect x="62" y="116" width="50" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="120" y="116" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="166" y="116" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="212" y="116" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="258" y="116" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="304" y="116" width="34" height="14" rx="4" fill="#4F46E5"/>
+
+  <!-- Baris tombol 3 -->
+  <rect x="62" y="138" width="60" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="130" y="138" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="176" y="138" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="222" y="138" width="38" height="14" rx="4" fill="#4F46E5"/>
+  <rect x="268" y="138" width="70" height="14" rx="4" fill="#4F46E5"/>
+
+  <!-- Spasi -->
+  <rect x="130" y="158" width="140" height="2" rx="1" fill="#4F46E5"/>
+  <rect x="126" y="146" width="148" height="0" fill="none"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250" role="img" aria-label="Mouse wireless MW-88 indigo dengan roda gulir amber">
+  <!-- Aset penanda produk MW-88 — siluet mouse, palet token Bab 4 -->
+  <rect width="400" height="250" fill="#F8FAFC"/>
+  <rect x="148" y="36" width="104" height="178" rx="52" fill="#1E293B"/>
+  <rect x="154" y="42" width="92" height="166" rx="46" fill="#4F46E5"/>
+  <line x1="200" y1="44" x2="200" y2="126" stroke="#F8FAFC" stroke-width="3"/>
+  <rect x="191" y="62" width="18" height="34" rx="9" fill="#F59E0B"/>
+</svg>

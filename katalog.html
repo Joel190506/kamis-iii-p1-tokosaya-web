@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!-- Katalog Tokosaya — wadah daftar produk memakai .katalog-grid dari Bab 7
+     (satu kolom di HP, 2/3/4 kolom pada 576/992/1200 px). Delapan produk baku
+     tampil tuntas: 4 kolom x 2 baris di 1200 px. -->
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Katalog Tokosaya — delapan perangkat kerja digital pilihan: keyboard, mouse, headphone, monitor, flash drive, charger, speaker, dan webcam.">
+  <title>Katalog Produk — Tokosaya</title>
+  <link rel="icon" href="img/logo-tokosaya.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Navigasi utama">
+      <a class="site-nav-brand" href="index.html">Tokosaya</a>
+      <!-- Buka-tutup menu tanpa JavaScript: kotak centang tersembunyi yang
+           dipasangkan ke label .site-nav-burger lewat pasangan for-id -->
+      <input class="site-nav-toggle" type="checkbox" id="nav-toggle" aria-label="Menu navigasi">
+      <label class="site-nav-burger" for="nav-toggle"></label>
+      <ul class="site-nav-menu">
+          <li><a href="index.html" class="site-nav-link">Beranda</a></li>
+          <li><a href="katalog.html" class="site-nav-link site-nav-link-aktif" aria-current="page">Katalog</a></li>
+          <li><a href="tentang.html" class="site-nav-link">Tentang</a></li>
+          <li><a href="kontak.html" class="site-nav-link">Kontak</a></li>
+      </ul>
+      <!-- Halaman keranjang dibangun di Bab 11 (varian Bootstrap); prototipe
+           Bab 1-8 menunjuk beranda supaya tidak ada tautan tanpa tujuan -->
+      <a class="site-nav-keranjang" href="index.html">Keranjang (0)</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="katalog" aria-labelledby="judul-katalog">
+      <h1 id="judul-katalog" class="katalog-judul">Katalog Produk</h1>
+      <p class="katalog-intro">Perangkat kerja digital pilihan dengan harga jujur. Delapan produk baku Tokosaya, lengkap dengan status stoknya.</p>
+
+      <div class="katalog-grid">
+
+        <article class="produk-card">
+          <img class="produk-gambar" src="img/produk-keyboard-kx210.svg" alt="Keyboard mekanis KX-210 berwarna arang dengan tombol indigo" width="400" height="250">
+          <span class="produk-flag produk-flag-best">Best Seller</span>
+          <h2 class="produk-card-nama">Keyboard Mekanis KX-210</h2>
+          <p class="produk-card-kategori">Aksesori Input</p>
+          <p class="produk-card-harga">Rp650.000</p>
+          <p class="produk-card-deskripsi">Keyboard mekanis 87 tombol dengan switch biru untuk kerja lama yang nyaman.</p>
+          <a class="produk-card-tautan" href="produk.html" aria-label="Lihat detail Keyboard Mekanis KX-210">Lihat Detail</a>
+        </article>
+
+        <article class="produk-card">
+          <img class="produk-gambar" src="img/produk-mouse-mw88.svg" alt="Mouse wireless MW-88 indigo dengan roda gulir amber" width="400" height="250">
+          <span class="produk-flag produk-flag-tersedia">Tersedia</span>
+          <h2 class="produk-card-nama">Mouse Wireless MW-88</h2>
+          <p class="produk-card-kategori">Aksesori Input</p>
+          <p class="produk-card-harga">Rp185.000</p>
+          <p class="produk-card-deskripsi">Mouse wireless 2,4 GHz dengan sensor presisi 1600 DPI.</p>
+        </article>
+
+        <article class="produk-card">
+          <img class="produk-gambar" src="img/produk-headphone-hs15.svg" alt="Headphone over-ear HS-15 dengan bantalan telinga indigo" width="400" height="250">
+          <span class="produk-flag produk-flag-tersedia">Tersedia</span>
+          <h2 class="produk-card-nama">Headphone Studio HS-15</h2>
+          <p class="produk-card-kategori">Audio</p>
+          <p class="produk-card-harga">Rp425.000</p>
+          <p class="produk-card-deskripsi">Headphone over-ear dengan bantalan lembut untuk rapat audio jangka panjang.</p>
+        </article>
+
+        <article class="produk-card">
+          <img class="produk-gambar" src="img/produk-monitor-mr241.svg" alt="Monitor IPS 24 inci MR-241 dengan layar indigo" width="400" height="250">
+          <span class="produk-flag produk-flag-best">Best Seller</span>
+          <h2 class="produk-card-nama">Monitor IPS 24&#8243; MR-241</h2>
+          <p class="produk-card-kategori">Layar</p>
+          <p class="produk-card-harga">Rp1.899.000</p>
+          <p class="produk-card-deskripsi">Monitor IPS 24 inci full HD yang jernih untuk kerja tabel &amp; laporan.</p>
+        </article>
+
+        <article class="produk-card">
+          <img class="produk-gambar" src="img/produk-flashdrive-fd64.svg" alt="Flash drive 64GB FD-64 dengan konektor USB berwarna perak" width="400" height="250">
+          <span class="produk-flag produk-flag-tersedia">Tersedia</span>
+          <h2 class="produk-card-nama">Flash Drive 64GB FD-64</h2>
+          <p class="produk-card-kategori">Penyimpanan</p>
+          <p class="produk-card-harga">Rp95.000</p>
+          <p class="produk-card-deskripsi">Flash drive 64GB untuk arsip dokumen dan tugas mahasiswa.</p>
+        </article>
+
+        <article class="produk-card">
+          <img class="produk-gambar" src="img/produk-charger-cp30.svg" alt="Charger cepat 30W CP-30 dengan dua kaki colokan dan kabel USB" width="400" height="250">
+          <span class="produk-flag produk-flag-tersedia">Tersedia</span>
+          <h2 class="produk-card-nama">Charger Cepat 30W CP-30</h2>
+          <p class="produk-card-kategori">Daya</p>
+          <p class="produk-card-harga">Rp120.000</p>
+          <p class="produk-card-deskripsi">Charger 30W untuk pengisian cepat ponsel dan tablet saat mengetik di kafe.</p>
+        </article>
+
+        <article class="produk-card">
+          <img class="produk-gambar" src="img/produk-speaker-bt5.svg" alt="Speaker bluetooth portabel BT-5 dengan dua driver indigo" width="400" height="250">
+          <span class="produk-flag produk-flag-stok">Stok Terbatas</span>
+          <h2 class="produk-card-nama">Speaker Bluetooth BT-5</h2>
+          <p class="produk-card-kategori">Audio</p>
+          <p class="produk-card-harga">Rp285.000</p>
+          <p class="produk-card-deskripsi">Speaker bluetooth portabel dengan suara bersih untuk presentasi kelompok.</p>
+        </article>
+
+        <article class="produk-card">
+          <img class="produk-gambar" src="img/produk-webcam-wc720.svg" alt="Webcam HD WC-720 dengan lensa bundar dan klip penjepit" width="400" height="250">
+          <span class="produk-flag produk-flag-baru">Baru</span>
+          <h2 class="produk-card-nama">Webcam HD WC-720</h2>
+          <p class="produk-card-kategori">Video</p>
+          <p class="produk-card-harga">Rp310.000</p>
+          <p class="produk-card-deskripsi">Webcam 720p dengan mikrofon bawaan untuk kelas online dan wawancara.</p>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-brand">Tokosaya</p>
+    <p class="footer-teks">Belanja Tepat, Kirim Cepat — Jl. Digital Raya No. 10, Jakarta &middot; halo@tokosaya.id &middot; (021) 555-0199</p>
+  </footer>
+
+</body>
+</html>

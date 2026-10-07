@@ -1,0 +1,295 @@
+/* ============================================================================
+   Tokosaya — css/admin.css
+   Disalin dari Bab 7 apa adanya (mobile-first).
+
+   Asumsi: css/style.css sudah memuat token :root (Bab 4) dan reset dasar
+   (Bab 3-5). Berkas ini cuma aturan panel admin.
+
+   Urutan link di admin.html penting: style.css dulu, admin.css menyusul.
+   Kalau dibalik, token --clr-* belum ada saat aturan di bawah dievaluasi.
+   ============================================================================ */
+
+/* Pengaman kecil biar panel tetap rapi walau style.css diubah */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile-first: seluruh area bertumpuk satu kolom */
+.dasbor {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+  background: var(--clr-bg);
+  color: var(--clr-body);
+  font-family: var(--font-body);
+}
+
+/* Tambahan proyek (tanpa rujukan bab) — perbaikan cacat terukur pada CSS Bab 7.
+
+   Sebagai item grid, keempat area di atas punya `min-width: auto`, sehingga
+   kolom `1fr` nggak bisa menyusut di bawah lebar min-content isinya. Akibatnya
+   `.tabel-scroll table { min-width: 640px }` (640 + padding 48 = 690 px) dan
+   baris chip `.dasbor-nav` (642 px) memaksa <body> menggulir mendatar di
+   375/576/768 px — padahal Hasil yang Diharapkan Bab 7 menuntut "nggak ada
+   pengguliran horizontal pada <body>" justru di lebar-lebar itu.
+
+   Diukur di Chromium: pada clientWidth 375 px, scrollWidth 690 px. Setelah
+   `min-width: 0` hanya di .dasbor-main, angkanya turun ke 605 px dan chip nav
+   jadi penghambat berikutnya; keempat area perlu `min-width: 0` supaya track
+   `1fr` benar-benar mengikuti lebar viewport. */
+.dasbor > * {
+  min-width: 0;
+}
+
+/* --- Header --- */
+.dasbor-header {
+  grid-area: header;
+  background: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border);
+  padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 3);
+}
+
+.dasbor-brand {
+  margin: 0 0 calc(var(--space-unit));
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-primary);
+}
+
+.dasbor-judul {
+  margin: 0;
+  font-family: var(--font-heading);
+  color: var(--clr-dark);
+  line-height: 1.2;
+  font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.25rem);
+}
+
+.dasbor-waktu {
+  margin: calc(var(--space-unit)) 0 0;
+  font-size: 0.875rem;
+}
+
+/* --- Navigasi: chip horizontal di HP, kolom di tablet ke atas --- */
+.dasbor-nav {
+  grid-area: nav;
+  background: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border);
+  padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 3);
+}
+
+.dasbor-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: calc(var(--space-unit) * 2);
+  overflow-x: auto;
+}
+
+.dasbor-tautan {
+  display: block;
+  padding: calc(var(--space-unit)) calc(var(--space-unit) * 2);
+  border: 1px solid var(--clr-border);
+  border-radius: 999px;
+  color: var(--clr-body);
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.dasbor-tautan:hover {
+  border-color: var(--clr-primary);
+  color: var(--clr-primary);
+}
+
+.dasbor-tautan:focus-visible {
+  outline: 2px solid var(--clr-primary);
+  outline-offset: 2px;
+}
+
+.dasbor-tautan.aktif {
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
+  color: #FFFFFF;
+}
+
+/* --- Main --- */
+.dasbor-main {
+  grid-area: main;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: calc(var(--space-unit) * 3);
+}
+
+.ringkasan {
+  margin-bottom: calc(var(--space-unit) * 4);
+}
+
+.judul-seksi {
+  font-family: var(--font-heading);
+  color: var(--clr-dark);
+  font-size: 1.25rem;
+  margin: 0 0 calc(var(--space-unit) * 2);
+}
+
+/* --- Kartu statistik (grid, dasar 1 kolom) --- */
+.stat-kartu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: calc(var(--space-unit) * 2);
+}
+
+.stat-kartu-item {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: calc(var(--space-unit) * 3);
+}
+
+.stat-kartu-label {
+  margin: 0 0 calc(var(--space-unit));
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-kartu-nilai {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+  font-weight: 700;
+  color: var(--clr-dark);
+}
+
+.stat-kartu-keterangan {
+  margin: calc(var(--space-unit)) 0 0;
+  font-size: 0.875rem;
+}
+
+/* --- Tabel pesanan dalam wadah penggulir ---
+   Tabel menggulir DI DALAM .tabel-scroll, bukan di <body> — inti latihan
+   Bab 7 soal overflow. min-width 640px yang memaksanya menggulir. */
+.tabel-scroll {
+  overflow-x: auto;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.tabel-scroll table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+}
+
+.tabel-scroll caption {
+  caption-side: bottom;
+  padding: calc(var(--space-unit) * 2);
+  font-size: 0.85rem;
+}
+
+.tabel-scroll th,
+.tabel-scroll td {
+  padding: calc(var(--space-unit) * 2);
+  text-align: left;
+  border-bottom: 1px solid var(--clr-border);
+  font-size: 0.9rem;
+}
+
+.tabel-scroll thead th {
+  background: var(--clr-bg);
+  font-family: var(--font-heading);
+  color: var(--clr-dark);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tabel-scroll tbody tr:last-child th,
+.tabel-scroll tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.status-lunas    { color: var(--clr-success); font-weight: 600; }
+.status-diproses { color: var(--clr-accent);  font-weight: 600; }
+.status-dikirim  { color: var(--clr-primary); font-weight: 600; }
+
+/* --- Footer --- */
+.dasbor-footer {
+  grid-area: footer;
+  background: var(--clr-surface);
+  border-top: 1px solid var(--clr-border);
+  text-align: center;
+  padding: calc(var(--space-unit) * 3);
+  font-size: 0.85rem;
+}
+
+/* ====== Breakpoint menaik (mobile-first) ====== */
+
+/* sm: kartu dua kolom */
+@media (min-width: 576px) {
+  .stat-kartu { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* md: sidebar bergeser ke kolom kiri (denah digambar ulang) */
+@media (min-width: 768px) {
+  .dasbor {
+    grid-template-columns: 220px 1fr;
+    grid-template-areas:
+      "header header"
+      "nav main"
+      "footer footer";
+  }
+
+  .dasbor-nav {
+    padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 2);
+    border-bottom: none;
+    border-right: 1px solid var(--clr-border);
+  }
+
+  .dasbor-nav ul {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+
+  .dasbor-tautan {
+    border: none;
+    border-left: 4px solid transparent;
+    border-radius: 0;
+    padding: calc(var(--space-unit)) calc(var(--space-unit) * 2);
+  }
+
+  .dasbor-tautan.aktif {
+    background: transparent;
+    color: var(--clr-primary);
+    border-left-color: var(--clr-primary);
+  }
+}
+
+/* lg: sidebar lebih lega, jarak kartu meluas */
+@media (min-width: 992px) {
+  .dasbor { grid-template-columns: 240px 1fr; }
+  .stat-kartu { gap: calc(var(--space-unit) * 3); }
+  .dasbor-main { padding: calc(var(--space-unit) * 4); }
+}
+
+/* xl: empat kartu sebaris, konten terpusat maksimal 1200px */
+@media (min-width: 1200px) {
+  .stat-kartu { grid-template-columns: repeat(4, 1fr); }
+  .dasbor { grid-template-columns: 260px 1fr; }
+}

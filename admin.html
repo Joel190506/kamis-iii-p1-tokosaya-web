@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- Dashboard Admin Tokosaya — salinan kode Bab 7, termasuk tautan nav
+     "Pesanan" yang menunjuk admin.html sendiri seperti tertulis di buku.
+     Halaman ini sengaja TIDAK memakai .site-header/.site-nav; ia punya
+     .dasbor sendiri dengan nav samping. -->
+<html lang="id">
+<head>
+  <!-- Proyek Bab 1-8: HTML/CSS murni, tanpa Bootstrap (lihat Bab 9) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard admin Tokosaya — ringkasan penjualan harian dan daftar pesanan terbaru.">
+  <title>Dashboard Admin — Tokosaya</title>
+  <link rel="icon" href="img/logo-tokosaya.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Urutan penting: style.css dulu (token + reset), admin.css menyusul -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="dasbor">
+
+    <header class="dasbor-header">
+      <p class="dasbor-brand">Tokosaya</p>
+      <h1 class="dasbor-judul">Dashboard Admin</h1>
+      <p class="dasbor-waktu">Data contoh statis — pembaruan terakhir: Senin, 6 Oktober 2025, 09.10 WIB</p>
+    </header>
+
+    <nav class="dasbor-nav" aria-label="Navigasi panel admin">
+      <ul>
+        <li><a class="dasbor-tautan aktif" href="admin.html" aria-current="page">Dashboard</a></li>
+        <li><a class="dasbor-tautan" href="katalog.html">Katalog</a></li>
+        <li><a class="dasbor-tautan" href="admin.html">Pesanan</a></li>
+        <li><a class="dasbor-tautan" href="tentang.html">Tentang</a></li>
+        <li><a class="dasbor-tautan" href="kontak.html">Kontak</a></li>
+      </ul>
+    </nav>
+
+    <main class="dasbor-main">
+
+      <section class="ringkasan" aria-labelledby="judul-ringkasan">
+        <h2 id="judul-ringkasan" class="judul-seksi">Ringkasan Hari Ini</h2>
+        <ul class="stat-kartu">
+          <li class="stat-kartu-item">
+            <p class="stat-kartu-label">Penjualan Hari Ini</p>
+            <p class="stat-kartu-nilai">Rp1.240.000</p>
+            <p class="stat-kartu-keterangan">Data contoh statis dashboard</p>
+          </li>
+          <li class="stat-kartu-item">
+            <p class="stat-kartu-label">Pesanan Baru</p>
+            <p class="stat-kartu-nilai">27</p>
+            <p class="stat-kartu-keterangan">Menunggu diproses</p>
+          </li>
+          <li class="stat-kartu-item">
+            <p class="stat-kartu-label">Produk Aktif</p>
+            <p class="stat-kartu-nilai">8</p>
+            <p class="stat-kartu-keterangan">Katalog Tokosaya</p>
+          </li>
+          <li class="stat-kartu-item">
+            <p class="stat-kartu-label">Status Stok</p>
+            <p class="stat-kartu-nilai">2</p>
+            <p class="stat-kartu-keterangan">Perlu perhatian (stok terbatas)</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="pesanan" aria-labelledby="judul-pesanan">
+        <h2 id="judul-pesanan" class="judul-seksi">Pesanan Terbaru</h2>
+        <div class="tabel-scroll">
+          <table>
+            <caption>Lima pesanan teratas (data contoh statis)</caption>
+            <thead>
+              <tr>
+                <th scope="col">No. Pesanan</th>
+                <th scope="col">Pelanggan</th>
+                <th scope="col">Produk</th>
+                <th scope="col">Total</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">TKS-2418</th>
+                <td>Rina Pratiwi</td>
+                <td>Keyboard Mekanis KX-210</td>
+                <td>Rp650.000</td>
+                <td><span class="status-lunas">Lunas</span></td>
+              </tr>
+              <tr>
+                <th scope="row">TKS-2417</th>
+                <td>Dimas Arjuna</td>
+                <td>Speaker Bluetooth BT-5</td>
+                <td>Rp285.000</td>
+                <td><span class="status-diproses">Diproses</span></td>
+              </tr>
+              <tr>
+                <th scope="row">TKS-2416</th>
+                <td>Sari Wulandari</td>
+                <td>Mouse Wireless MW-88 &times; 2</td>
+                <td>Rp370.000</td>
+                <td><span class="status-dikirim">Dikirim</span></td>
+              </tr>
+              <tr>
+                <th scope="row">TKS-2415</th>
+                <td>Budi Santoso</td>
+                <td>Monitor IPS 24" MR-241</td>
+                <td>Rp1.899.000</td>
+                <td><span class="status-lunas">Lunas</span></td>
+              </tr>
+              <tr>
+                <th scope="row">TKS-2414</th>
+                <td>Ayu Lestari</td>
+                <td>Webcam HD WC-720</td>
+                <td>Rp310.000</td>
+                <td><span class="status-diproses">Diproses</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="dasbor-footer">
+      <p>&copy; 2026 Tokosaya — Belanja Tepat, Kirim Cepat · Jl. Digital Raya No. 10, Jakarta · halo@tokosaya.id · (021) 555-0199</p>
+    </footer>
+
+  </div>
+</body>
+</html>

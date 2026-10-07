@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250" role="img" aria-label="Charger cepat 30W CP-30 dengan dua kaki colokan dan kabel USB">
+  <!-- Aset penanda produk CP-30 — siluet charger, palet token Bab 4 -->
+  <rect width="400" height="250" fill="#F8FAFC"/>
+  <rect x="136" y="44" width="16" height="30" rx="4" fill="#CBD5E1"/>
+  <rect x="196" y="44" width="16" height="30" rx="4" fill="#CBD5E1"/>
+  <rect x="126" y="66" width="96" height="112" rx="18" fill="#4F46E5"/>
+  <rect x="126" y="66" width="96" height="112" rx="18" fill="none" stroke="#4338CA" stroke-width="3"/>
+  <rect x="152" y="134" width="44" height="20" rx="5" fill="#1E293B"/>
+  <rect x="160" y="140" width="28" height="8" rx="4" fill="#94A3B8"/>
+  <path d="M 174 156 C 174 196 226 190 258 196" fill="none" stroke="#1E293B" stroke-width="9" stroke-linecap="round"/>
+  <rect x="256" y="186" width="34" height="22" rx="5" fill="#94A3B8"/>
+  <rect x="288" y="192" width="18" height="10" rx="3" fill="#CBD5E1"/>
+  <circle cx="174" cy="96" r="8" fill="#F59E0B"/>
+</svg>
